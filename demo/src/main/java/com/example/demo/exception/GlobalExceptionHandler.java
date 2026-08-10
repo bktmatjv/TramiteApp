@@ -31,10 +31,32 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(errors, HttpStatus.BAD_REQUEST);
     }
 
+    @ExceptionHandler(TramiteNoEncontradoException.class)
+    public ResponseEntity<Map<String, String>> handleTramiteNoEncontradoException(TramiteNoEncontradoException ex) {
+        Map<String, String> response = new HashMap<>();
+        response.put("error", ex.getMessage());
+        return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(EstadoInvalidoException.class)
+    public ResponseEntity<Map<String, String>> handleEstadoInvalidoException(EstadoInvalidoException ex) {
+        Map<String, String> response = new HashMap<>();
+        response.put("error", ex.getMessage());
+        return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(org.springframework.security.access.AccessDeniedException.class)
+    public ResponseEntity<Map<String, String>> handleAccessDeniedException(org.springframework.security.access.AccessDeniedException ex) {
+        Map<String, String> response = new HashMap<>();
+        response.put("error", "Acceso denegado: " + ex.getMessage());
+        return new ResponseEntity<>(response, HttpStatus.FORBIDDEN);
+    }
+
     @ExceptionHandler(Exception.class)
     public ResponseEntity<Map<String, String>> handleGlobalException(Exception ex) {
+        ex.printStackTrace(); // Log the error on the server console for debugging
         Map<String, String> response = new HashMap<>();
-        response.put("error", "Ha ocurrido un error interno en el servidor: " + ex.getMessage());
+        response.put("error", "Ha ocurrido un error interno en el servidor.");
         return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }

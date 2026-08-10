@@ -11,18 +11,31 @@ public class Usuario {
     private Long id;
 
     @Column(unique = true, nullable = false)
-    private String username;
+    private String dni;
+
+    @Column(nullable = false)
+    private String nombres;
+
+    @Column(nullable = false)
+    private String apellidos;
+
+    @Column(unique = true, nullable = false)
+    private String email;
 
     @Column(nullable = false)
     private String password;
 
+    @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private String rol;
+    private Role rol;
 
     public Usuario() {}
 
-    public Usuario(String username, String password, String rol) {
-        this.username = username;
+    public Usuario(String dni, String nombres, String apellidos, String email, String password, Role rol) {
+        this.dni = dni;
+        this.nombres = nombres;
+        this.apellidos = apellidos;
+        this.email = email;
         this.password = password;
         this.rol = rol;
     }
@@ -35,12 +48,36 @@ public class Usuario {
         this.id = id;
     }
 
-    public String getUsername() {
-        return username;
+    public String getDni() {
+        return dni;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setDni(String dni) {
+        this.dni = dni;
+    }
+
+    public String getNombres() {
+        return nombres;
+    }
+
+    public void setNombres(String nombres) {
+        this.nombres = nombres;
+    }
+
+    public String getApellidos() {
+        return apellidos;
+    }
+
+    public void setApellidos(String apellidos) {
+        this.apellidos = apellidos;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getPassword() {
@@ -51,11 +88,11 @@ public class Usuario {
         this.password = password;
     }
 
-    public String getRol() {
+    public Role getRol() {
         return rol;
     }
 
-    public void setRol(String rol) {
+    public void setRol(Role rol) {
         this.rol = rol;
     }
 }

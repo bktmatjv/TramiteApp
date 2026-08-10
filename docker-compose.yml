@@ -2,58 +2,58 @@
 services:
   # Base de Datos
   db:
-    image: mysql:8.0
-    container_name: mentoring_db
+    image: postgres:15-alpine
+    container_name: edugestor_db
     restart: always
     environment:
-      MYSQL_DATABASE: ${DB_NAME:-mentoring_db}
-      MYSQL_USER: ${DB_USER:-user}
-      MYSQL_PASSWORD: ${DB_PASSWORD:-password}
-      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD:-root}
+      POSTGRES_DB: ${DB_NAME:-edugestor_db}
+      POSTGRES_USER: ${DB_USER:-postgres}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-postgres}
     ports:
-      - "3306:3306"
+      - "5432:5432"
     volumes:
-      - db_data:/var/lib/mysql
+      - db_data:/var/lib/postgresql/data
     networks:
-      - mentoring_network
+      - edugestor_network
 
   # Backend (Spring Boot)
   backend:
     build:
       context: ./demo
       dockerfile: Dockerfile
-    container_name: mentoring_backend
+    container_name: edugestor_backend
     restart: always
+    entrypoint: ["sh", "-c", "sleep 15 && java -jar app.jar"]
     depends_on:
       - db
     environment:
       - DB_HOST=db
-      - DB_PORT=3306
-      - DB_NAME=${DB_NAME:-mentoring_db}
-      - DB_USER=${DB_USER:-user}
-      - DB_PASSWORD=${DB_PASSWORD:-password}
+      - DB_PORT=5432
+      - DB_NAME=${DB_NAME:-edugestor_db}
+      - DB_USER=${DB_USER:-postgres}
+      - DB_PASSWORD=${DB_PASSWORD:-postgres}
     ports:
       - "8080:8080"
     networks:
-      - mentoring_network
+      - edugestor_network
 
   # Frontend (React + Nginx)
   frontend:
     build:
       context: ./frontend
       dockerfile: Dockerfile
-    container_name: mentoring_frontend
+    container_name: edugestor_frontend
     restart: always
     depends_on:
       - backend
     ports:
-      - "5173:80" # Mapeado al puerto estándar de Vite en el host por comodidad
+      - "5173:80"
     networks:
-      - mentoring_network
+      - edugestor_network
 
 volumes:
   db_data:
 
 networks:
-  mentoring_network:
+  edugestor_network:
     driver: bridge

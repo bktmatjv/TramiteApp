@@ -1,65 +1,115 @@
 import React, { useState } from 'react';
-import { login } from '../services/api';
+import { useNavigate, Link } from 'react-router-dom';
+import api from '../services/api';
+import { useAuth } from '../context/AuthContext';
 import './Login.css';
 
-const Login = ({ onLoginSuccess }) => {
-    const [username, setUsername] = useState('');
-    const [password, setPassword] = useState('');
-    const [error, setError] = useState(null);
-    const [loading, setLoading] = useState(false);
+const Login = () => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
+  const { login } = useAuth();
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        setError(null);
-        setLoading(true);
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    setError('');
+    setLoading(true);
+    try {
+      const response = await api.post('/auth/login', { email, password });
+      login(response.data.token);
+      const { jwtDecode } = await import('jwt-decode');
+      const decoded = jwtDecode(response.data.token);
+      if (decoded.rol === 'ROLE_ADMIN') {
+        navigate('/admin/solicitudes');
+      } else {
+        navigate('/alumno/mis-tramites');
+      }
+    } catch (err) {
+      setError('Credenciales inválidas o error en el servidor.');
+    } finally {
+      setLoading(false);
+    }
+  };
 
-        try {
-            await login(username, password);
-            onLoginSuccess();
-        } catch (err) {
-            setError('Credenciales incorrectas o error de conexión');
-        } finally {
-            setLoading(false);
-        }
-    };
-
-    return (
-        <div className="login-container">
-            <div className="login-box">
-                <h2>Iniciar Sesión</h2>
-                <p>Ingresa tus credenciales para acceder</p>
-                {error && <div className="alert alert-error">{error}</div>}
-                
-                <form onSubmit={handleSubmit}>
-                    <div className="form-group">
-                        <label htmlFor="username">Usuario</label>
-                        <input
-                            type="text"
-                            id="username"
-                            value={username}
-                            onChange={(e) => setUsername(e.target.value)}
-                            required
-                        />
-                    </div>
-                    
-                    <div className="form-group">
-                        <label htmlFor="password">Contraseña</label>
-                        <input
-                            type="password"
-                            id="password"
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
-                            required
-                        />
-                    </div>
-                    
-                    <button type="submit" className="btn btn-primary btn-block" disabled={loading}>
-                        {loading ? 'Iniciando sesión...' : 'Entrar'}
-                    </button>
-                </form>
-            </div>
+  return (
+    <div className="auth-page">
+      {/* Left branding panel */}
+      <aside className="auth-panel-left">
+        <div className="auth-panel-left-content">
+          <div className="auth-left-brand">
+            <div className="auth-left-brand-icon">E</div>
+            <span className="auth-left-brand-name">EduGestor</span>
+          </div>
+          <h2 className="auth-left-headline">
+            Gestión de trámites, simplificada.
+          </h2>
+          <p className="auth-left-desc">
+            Solicita, rastrea y gestiona todos tus trámites educativos desde un solo lugar, de forma rápida y segura.
+          </p>
+          <ul className="auth-left-features">
+            <li>Solicita trámites en segundos</li>
+            <li>Seguimiento en tiempo real</li>
+            <li>Reporta pagos fácilmente</li>
+            <li>Historial completo de solicitudes</li>
+          </ul>
         </div>
-    );
+        <p className="auth-left-footer">© 2026 EduGestor. Todos los derechos reservados.</p>
+      </aside>
+
+      {/* Right form panel */}
+      <div className="auth-panel-right">
+        <div className="auth-form-wrapper">
+          {/* Mobile brand */}
+          <div className="auth-mobile-brand">
+            <div className="auth-mobile-brand-icon">E</div>
+            <span className="auth-mobile-brand-name">EduGestor</span>
+          </div>
+
+          <h1 className="auth-heading">Bienvenido</h1>
+          <p className="auth-subheading">Inicia sesión para continuar</p>
+
+          {error && <div className="alert alert-error">{error}</div>}
+
+          <form onSubmit={handleLogin} className="auth-form" id="login-form">
+            <div className="form-group">
+              <label htmlFor="login-email">Email o DNI</label>
+              <input
+                type="text"
+                id="login-email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="admin@edugestor.com"
+                required
+                autoComplete="username"
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="login-password">Contraseña</label>
+              <input
+                type="password"
+                id="login-password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                placeholder="••••••••"
+                required
+                autoComplete="current-password"
+              />
+            </div>
+            <button type="submit" className="auth-submit-btn" disabled={loading}>
+              {loading ? 'Ingresando...' : 'Ingresar'}
+            </button>
+          </form>
+
+          <div className="auth-link-row">
+            ¿No tienes cuenta?{' '}
+            <Link to="/register" className="auth-link">Regístrate</Link>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
 };
 
 export default Login;
