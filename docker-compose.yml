@@ -1,0 +1,59 @@
+
+services:
+  # Base de Datos
+  db:
+    image: mysql:8.0
+    container_name: mentoring_db
+    restart: always
+    environment:
+      MYSQL_DATABASE: ${DB_NAME:-mentoring_db}
+      MYSQL_USER: ${DB_USER:-user}
+      MYSQL_PASSWORD: ${DB_PASSWORD:-password}
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD:-root}
+    ports:
+      - "3306:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+    networks:
+      - mentoring_network
+
+  # Backend (Spring Boot)
+  backend:
+    build:
+      context: ./demo
+      dockerfile: Dockerfile
+    container_name: mentoring_backend
+    restart: always
+    depends_on:
+      - db
+    environment:
+      - DB_HOST=db
+      - DB_PORT=3306
+      - DB_NAME=${DB_NAME:-mentoring_db}
+      - DB_USER=${DB_USER:-user}
+      - DB_PASSWORD=${DB_PASSWORD:-password}
+    ports:
+      - "8080:8080"
+    networks:
+      - mentoring_network
+
+  # Frontend (React + Nginx)
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: mentoring_frontend
+    restart: always
+    depends_on:
+      - backend
+    ports:
+      - "5173:80" # Mapeado al puerto estándar de Vite en el host por comodidad
+    networks:
+      - mentoring_network
+
+volumes:
+  db_data:
+
+networks:
+  mentoring_network:
+    driver: bridge
