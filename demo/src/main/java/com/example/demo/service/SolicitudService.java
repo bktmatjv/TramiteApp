@@ -119,6 +119,8 @@ public class SolicitudService {
         dto.setFechaSolicitud(solicitud.getFechaSolicitud());
         dto.setFechaActualizacion(solicitud.getFechaActualizacion());
         dto.setCodigoOperacionBanco(solicitud.getCodigoOperacionBanco());
+        dto.setAlumnoNombre(solicitud.getAlumno().getNombres() + " " + solicitud.getAlumno().getApellidos());
+        dto.setAlumnoDni(solicitud.getAlumno().getDni());
 
         TipoTramiteDTO tramiteDTO = new TipoTramiteDTO();
         tramiteDTO.setId(solicitud.getTipoTramite().getId());

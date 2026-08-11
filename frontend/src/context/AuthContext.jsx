@@ -51,7 +51,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   if (loading) {
-    return <div className="flex items-center justify-center min-h-screen">Cargando...</div>;
+    return <div className="loading-screen"><div className="spinner" /></div>;
   }
 
   return (

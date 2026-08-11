@@ -8,6 +8,7 @@ import Layout from './components/Layout';
 import CatalogoTramites from './components/CatalogoTramites';
 import MisTramites from './components/MisTramites';
 import GestionSolicitudes from './components/GestionSolicitudes';
+import GestionCatalogo from './components/GestionCatalogo';
 import Perfil from './components/Perfil';
 
 function App() {
@@ -38,6 +39,7 @@ function App() {
             </ProtectedRoute>
           }>
             <Route path="solicitudes" element={<GestionSolicitudes />} />
+            <Route path="catalogo"    element={<GestionCatalogo />} />
             <Route index element={<Navigate to="solicitudes" replace />} />
           </Route>
 

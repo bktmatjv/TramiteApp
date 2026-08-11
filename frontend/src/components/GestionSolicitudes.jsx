@@ -122,6 +122,7 @@ const GestionSolicitudes = () => {
                 <thead>
                   <tr>
                     <th>Código / Fecha</th>
+                    <th>Alumno</th>
                     <th>Trámite</th>
                     <th>Op. Banco</th>
                     <th>Estado</th>
@@ -149,6 +150,12 @@ const GestionSolicitudes = () => {
                             month: 'short',
                             year: 'numeric',
                           })}
+                        </div>
+                      </td>
+                      <td>
+                        <div style={{ fontWeight: 600, fontSize: '0.875rem' }}>{s.alumnoNombre}</div>
+                        <div style={{ fontSize: '0.75rem', color: 'var(--clr-text-muted)', marginTop: 2 }}>
+                          DNI: {s.alumnoDni}
                         </div>
                       </td>
                       <td style={{ fontWeight: 500 }}>{s.tipoTramite?.nombre}</td>

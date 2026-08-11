@@ -1,18 +1,23 @@
 package com.example.demo.model.dto;
 
+import jakarta.validation.constraints.DecimalMin;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import java.math.BigDecimal;
 
-public class TipoTramiteDTO {
-    private Long id;
+public class TipoTramiteRequestDTO {
+
+    @NotBlank(message = "El nombre es obligatorio")
     private String nombre;
+
     private String descripcion;
+
+    @NotNull(message = "El costo es obligatorio")
+    @DecimalMin(value = "0.01", message = "El costo debe ser mayor a 0")
     private BigDecimal costo;
-    private Boolean activo;
 
-    public TipoTramiteDTO() {}
+    private Boolean activo = true;
 
-    public Long getId() { return id; }
-    public void setId(Long id) { this.id = id; }
     public String getNombre() { return nombre; }
     public void setNombre(String nombre) { this.nombre = nombre; }
     public String getDescripcion() { return descripcion; }

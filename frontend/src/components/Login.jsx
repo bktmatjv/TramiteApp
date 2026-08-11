@@ -40,22 +40,15 @@ const Login = () => {
         <div className="auth-panel-left-content">
           <div className="auth-left-brand">
             <div className="auth-left-brand-icon">E</div>
-            <span className="auth-left-brand-name">EduGestor</span>
+            <span className="auth-left-brand-name">TramiteApp</span>
           </div>
           <h2 className="auth-left-headline">
-            Gestión de trámites, simplificada.
+            Sistema de Gestión de Trámites
           </h2>
           <p className="auth-left-desc">
-            Solicita, rastrea y gestiona todos tus trámites educativos desde un solo lugar, de forma rápida y segura.
+            Gestión de trámites académicos que permite a los estudiantes solicitar certificados, constancias y otros documentos de manera eficiente y centralizada.
           </p>
-          <ul className="auth-left-features">
-            <li>Solicita trámites en segundos</li>
-            <li>Seguimiento en tiempo real</li>
-            <li>Reporta pagos fácilmente</li>
-            <li>Historial completo de solicitudes</li>
-          </ul>
         </div>
-        <p className="auth-left-footer">© 2026 EduGestor. Todos los derechos reservados.</p>
       </aside>
 
       {/* Right form panel */}
@@ -63,8 +56,8 @@ const Login = () => {
         <div className="auth-form-wrapper">
           {/* Mobile brand */}
           <div className="auth-mobile-brand">
-            <div className="auth-mobile-brand-icon">E</div>
-            <span className="auth-mobile-brand-name">EduGestor</span>
+            <div className="auth-mobile-brand-icon">T</div>
+            <span className="auth-mobile-brand-name">TramiteApp</span>
           </div>
 
           <h1 className="auth-heading">Bienvenido</h1>
@@ -80,7 +73,7 @@ const Login = () => {
                 id="login-email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                placeholder="admin@edugestor.com"
+                placeholder="admin@tramiteapp.com"
                 required
                 autoComplete="username"
               />

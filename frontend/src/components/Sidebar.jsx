@@ -1,7 +1,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import { FileText, ClipboardList, Shield, User } from 'lucide-react';
+import { FileText, ClipboardList, Shield, User, BookOpen } from 'lucide-react';
 
 function Sidebar({ onNavigate }) {
   const { user } = useAuth();
@@ -17,6 +17,7 @@ function Sidebar({ onNavigate }) {
   const navItems = isAdmin
     ? [
         { to: '/admin/solicitudes', icon: <ClipboardList size={17} />, label: 'Gestión Solicitudes' },
+        { to: '/admin/catalogo',    icon: <BookOpen size={17} />,      label: 'Catálogo de Trámites' },
       ]
     : [
         { to: '/alumno/tramites',     icon: <FileText size={17} />,     label: 'Catálogo Trámites' },
@@ -32,7 +33,7 @@ function Sidebar({ onNavigate }) {
           {isAdmin ? <Shield size={20} /> : <FileText size={20} />}
         </div>
         <div className="sidebar-brand-text">
-          <span className="sidebar-brand-name">EduGestor</span>
+          <span className="sidebar-brand-name">TramiteApp</span>
           <span className="sidebar-brand-sub">{isAdmin ? 'Admin Panel' : 'Portal Alumno'}</span>
         </div>
       </div>

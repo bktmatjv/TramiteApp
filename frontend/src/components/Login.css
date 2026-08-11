@@ -44,7 +44,7 @@
   width: 44px;
   height: 44px;
   background: rgba(255,255,255,.2);
-  border-radius: 12px;
+  border-radius: 3px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -149,7 +149,7 @@
   width: 38px;
   height: 38px;
   background: var(--clr-green-800);
-  border-radius: 10px;
+  border-radius: 3px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -206,7 +206,7 @@
 .auth-form select {
   padding: 0.75rem 1rem;
   border: 1.5px solid var(--clr-border);
-  border-radius: 10px;
+  border-radius: 3px;
   font-size: 0.9rem;
   font-family: var(--font-sans);
   color: var(--clr-text-primary);
@@ -219,7 +219,7 @@
 .auth-form select:focus {
   outline: none;
   border-color: var(--clr-green-600);
-  box-shadow: 0 0 0 3px rgba(46,125,50,.12);
+  box-shadow: 0 0 0 3px rgba(71,85,105,.12);
 }
 
 .auth-form input::placeholder {
@@ -233,19 +233,19 @@
   background: var(--clr-green-800);
   color: white;
   border: none;
-  border-radius: 10px;
+  border-radius: 3px;
   font-family: var(--font-sans);
   font-size: 0.9375rem;
   font-weight: 700;
   cursor: pointer;
   transition: background 0.15s, box-shadow 0.15s, transform 0.1s;
-  box-shadow: 0 2px 8px rgba(27,94,32,.35);
+  box-shadow: 0 2px 8px rgba(30,41,59,.3);
   letter-spacing: 0.01em;
 }
 
 .auth-submit-btn:hover:not(:disabled) {
   background: var(--clr-green-700);
-  box-shadow: 0 4px 16px rgba(27,94,32,.4);
+  box-shadow: 0 4px 16px rgba(30,41,59,.35);
   transform: translateY(-1px);
 }
 
@@ -287,7 +287,7 @@
   border: 1px solid #86efac;
   color: var(--clr-success-text);
   padding: 0.75rem 1rem;
-  border-radius: 8px;
+  border-radius: 3px;
   font-size: 0.875rem;
   font-weight: 500;
 }

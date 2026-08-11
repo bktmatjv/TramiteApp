@@ -11,6 +11,8 @@ public class SolicitudDTO {
     private LocalDateTime fechaSolicitud;
     private LocalDateTime fechaActualizacion;
     private String codigoOperacionBanco;
+    private String alumnoNombre;
+    private String alumnoDni;
 
     public SolicitudDTO() {}
 
@@ -28,4 +30,8 @@ public class SolicitudDTO {
     public void setFechaActualizacion(LocalDateTime fechaActualizacion) { this.fechaActualizacion = fechaActualizacion; }
     public String getCodigoOperacionBanco() { return codigoOperacionBanco; }
     public void setCodigoOperacionBanco(String codigoOperacionBanco) { this.codigoOperacionBanco = codigoOperacionBanco; }
+    public String getAlumnoNombre() { return alumnoNombre; }
+    public void setAlumnoNombre(String alumnoNombre) { this.alumnoNombre = alumnoNombre; }
+    public String getAlumnoDni() { return alumnoDni; }
+    public void setAlumnoDni(String alumnoDni) { this.alumnoDni = alumnoDni; }
 }

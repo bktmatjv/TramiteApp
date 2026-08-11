@@ -43,14 +43,14 @@ const Register = () => {
       <aside className="auth-panel-left">
         <div className="auth-panel-left-content">
           <div className="auth-left-brand">
-            <div className="auth-left-brand-icon">E</div>
-            <span className="auth-left-brand-name">EduGestor</span>
+            <div className="auth-left-brand-icon">T</div>
+            <span className="auth-left-brand-name">TramiteApp</span>
           </div>
           <h2 className="auth-left-headline">
             Crea tu cuenta y comienza hoy.
           </h2>
           <p className="auth-left-desc">
-            Únete a EduGestor y accede a un sistema moderno para gestionar todos tus trámites educativos de forma eficiente.
+            Únete a TramiteApp y accede a un sistema moderno para gestionar todos tus trámites educativos de forma eficiente.
           </p>
           <ul className="auth-left-features">
             <li>Registro rápido en segundos</li>
@@ -59,7 +59,7 @@ const Register = () => {
             <li>Datos seguros y protegidos</li>
           </ul>
         </div>
-        <p className="auth-left-footer">© 2026 EduGestor. Todos los derechos reservados.</p>
+        <p className="auth-left-footer">© 2026 TramiteApp. Todos los derechos reservados.</p>
       </aside>
 
       {/* Right form panel */}
@@ -67,8 +67,8 @@ const Register = () => {
         <div className="auth-form-wrapper">
           {/* Mobile brand */}
           <div className="auth-mobile-brand">
-            <div className="auth-mobile-brand-icon">E</div>
-            <span className="auth-mobile-brand-name">EduGestor</span>
+            <div className="auth-mobile-brand-icon">T</div>
+            <span className="auth-mobile-brand-name">TramiteApp</span>
           </div>
 
           <h1 className="auth-heading">Crear cuenta</h1>
